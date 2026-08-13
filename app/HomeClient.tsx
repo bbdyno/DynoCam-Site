@@ -109,7 +109,7 @@ export default function Home() {
           <a href="#experience" onClick={() => setMenuOpen(false)}>기능</a>
           <a href="#devices" onClick={() => setMenuOpen(false)}>디바이스</a>
           <a href="#technology" onClick={() => setMenuOpen(false)}>기술</a>
-          <a className="nav-cta" href="#download" onClick={() => setMenuOpen(false)}>출시 알림</a>
+          <a className="nav-cta" href="#download" onClick={() => setMenuOpen(false)}>App Store</a>
         </div>
       </nav>
 
@@ -134,7 +134,7 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <a className="primary-action" href="#experience">작동 방식 보기 <span>↓</span></a>
-            <a className="text-action" href="#download">출시 소식 받기 <span>↗</span></a>
+            <a className="text-action" href="#download">App Store에서 보기 <span>↗</span></a>
           </div>
         </div>
         <div className="hero-device-wrap" aria-hidden="true">
@@ -280,7 +280,7 @@ export default function Home() {
         <img className="closing-icon" src="./images/dynocam-icon.png" alt="DynoCam 앱 아이콘" />
         <p>COMING SOON ON THE APP STORE</p>
         <h2 id="closing-title">등반을 기록하는<br />새로운 시선.</h2>
-        <a href="mailto:hello@dynocam.app?subject=DynoCam%20launch%20news">출시 소식 받기 <span>↗</span></a>
+        <a href="https://apps.apple.com/app/id6800616313">App Store에서 보기 <span>↗</span></a>
       </section>
 
       <footer>
@@ -289,7 +289,7 @@ export default function Home() {
           <span>DynoCam</span>
         </a>
         <p>AI-powered climbing camera for iPhone &amp; iPad.</p>
-        <div><span>© 2026 DynoCam</span><a href="mailto:hello@dynocam.app">Contact</a></div>
+        <div><span>© 2026 DynoCam</span><a href="https://github.com/bbdyno/DynoCam-Site/issues">Contact</a></div>
       </footer>
     </main>
   );
