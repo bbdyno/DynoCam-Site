@@ -289,7 +289,11 @@ export default function Home() {
           <span>DynoCam</span>
         </a>
         <p>AI-powered climbing camera for iPhone &amp; iPad.</p>
-        <div><span>© 2026 DynoCam</span><a href="https://github.com/bbdyno/DynoCam-Site/issues">Contact</a></div>
+        <div>
+          <span>© 2026 DynoCam</span>
+          <a href="./support/">Support</a>
+          <a href="./privacy/">Privacy</a>
+        </div>
       </footer>
     </main>
   );
