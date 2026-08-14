@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://bbdyno.github.io/DynoCam-Site/"><img alt="Website" src="https://img.shields.io/badge/Website-DynoCam-111111?style=for-the-badge"></a>
-  <a href="https://apps.apple.com/app/id6800616313"><img alt="App Store" src="https://img.shields.io/badge/App_Store-Coming_Soon-0D96F6?style=for-the-badge&logo=apple"></a>
+  <a href="https://apps.apple.com/app/id6800616313"><img alt="App Store" src="https://img.shields.io/badge/App_Store-In_Review-0D96F6?style=for-the-badge&logo=apple"></a>
   <img alt="Version" src="https://img.shields.io/badge/Version-1.0-8C6BC2?style=for-the-badge">
   <img alt="Platforms" src="https://img.shields.io/badge/Platforms-iPhone_%C2%B7_iPad-555555?style=for-the-badge&logo=apple">
 </p>
@@ -67,11 +67,21 @@
 
 | 항목 | 내용 |
 |---|---|
-| 준비 중인 버전 | `1.0` (build 33) |
+| 심사 중인 버전 | `1.0` (build 33) · Waiting for Review |
 | 지원 기기 | iPhone, iPad |
 | 제품 사이트 | [bbdyno.github.io/DynoCam-Site](https://bbdyno.github.io/DynoCam-Site/) |
-| App Store | [apps.apple.com/app/id6800616313](https://apps.apple.com/app/id6800616313) · 심사 준비 중 |
+| App Store | [apps.apple.com/app/id6800616313](https://apps.apple.com/app/id6800616313) · 심사 중, 승인 후 자동 출시 |
 | 앱 소스 저장소 | [github.com/bbdyno/DynoCam](https://github.com/bbdyno/DynoCam) |
+
+## 출시 후 후속 작업
+
+승인 후에는 App Store 공개 여부와 두 Pro 구독의 판매 상태를 확인하고,
+AdMob 앱을 공개된 App Store 목록에 연결합니다. 이어서 실기기에서 무료
+워터마크 출력, 선택형 리워드 출력, Pro 무광고 출력과 구매 복원을 검증한 뒤
+이 README의 `In Review` 표시를 실제 다운로드 링크로 전환합니다.
+
+전체 운영 체크리스트는 앱 저장소의
+[POST_RELEASE_CHECKLIST.md](https://github.com/bbdyno/DynoCam/blob/main/POST_RELEASE_CHECKLIST.md)에 기록되어 있습니다.
 
 ## GitHub Pages 배포
 
