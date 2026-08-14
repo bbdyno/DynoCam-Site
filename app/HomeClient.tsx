@@ -12,7 +12,7 @@ const productScreens = [
     id: "track",
     eyebrow: "02 · TRACK",
     title: "AI가 움직임을\n읽어냅니다.",
-    body: "사람을 찾고, 포즈를 감지하고, 클라이머의 이동 경로를 만듭니다.",
+    body: "사람을 찾고 포즈를 감지해, 클라이밍부터 댄스와 스포츠까지 움직임의 경로를 만듭니다.",
     src: "./images/screens/iphone-processing.png",
   },
   {
@@ -123,14 +123,14 @@ export default function Home() {
         <div className="hero-orbit orbit-one" aria-hidden="true" />
         <div className="hero-orbit orbit-two" aria-hidden="true" />
         <div className="hero-copy">
-          <p className="kicker"><span /> AI CLIMBING CAMERA</p>
+          <p className="kicker"><span /> AI ACTION CAMERA</p>
           <h1>
             당신의 등반을,
             <strong>한 편의 움직임으로.</strong>
           </h1>
           <p className="hero-description">
-            DynoCam은 클라이머를 감지하고 움직임을 따라가며,
-            흔들리는 원본을 몰입감 있는 세로 영상으로 완성합니다.
+            DynoCam은 영상 속 사람을 감지하고 움직임을 따라가며,
+            클라이밍·댄스·스포츠 영상을 몰입감 있는 세로 콘텐츠로 완성합니다.
           </p>
           <div className="hero-actions">
             <a className="primary-action" href="#experience">작동 방식 보기 <span>↓</span></a>
@@ -159,7 +159,7 @@ export default function Home() {
         <div className="statement-grid">
           <p>
             삼각대에 세워둔 영상도 충분합니다. DynoCam이 사람의 위치와
-            포즈를 분석해 매 순간 새로운 카메라 프레임을 계산합니다.
+            포즈를 기기 안에서 분석해 매 순간 새로운 카메라 프레임을 계산합니다.
           </p>
           <div className="metric-row" aria-label="제품 주요 수치">
             <div><strong>3</strong><span>출력 화면비</span></div>
@@ -225,7 +225,7 @@ export default function Home() {
           <p className="section-index">03 / COMPUTER VISION</p>
           <h2 id="vision-title">사람을 찾고.<br />포즈를 읽고.<br /><span>움직임을 예측합니다.</span></h2>
           <p>
-            사람 검출과 포즈 추정을 결합해 클라이머의 중심을 계산하고,
+            사람 검출과 포즈 추정을 결합해 주인공의 중심을 계산하고,
             급격한 이동은 부드러운 카메라 경로로 바꿉니다.
           </p>
           <ul>
@@ -274,6 +274,39 @@ export default function Home() {
         </article>
       </section>
 
+      <section className="use-cases" aria-labelledby="use-cases-title">
+        <div className="use-cases-heading">
+          <p className="section-index">05 / MADE TO MOVE</p>
+          <h2 id="use-cases-title">어떤 움직임이든.<br /><span>한 사람에게 집중합니다.</span></h2>
+          <p>볼더링과 리드 클라이밍, 댄스 연습, 홈 트레이닝, 스케이트와 액션 스포츠까지. 사람이 선명하게 보이는 영상이라면 DynoCam의 자동 리프레임을 사용할 수 있습니다.</p>
+        </div>
+        <div className="use-case-grid">
+          <article><span>01</span><h3>Climbing</h3><p>등반자의 수직·수평 이동을 놓치지 않는 세로 프레임.</p></article>
+          <article><span>02</span><h3>Dance</h3><p>안무의 동선을 따라가는 부드러운 카메라 움직임.</p></article>
+          <article><span>03</span><h3>Training</h3><p>운동 자세와 반복 동작을 보기 쉬운 화면으로 정리.</p></article>
+          <article><span>04</span><h3>Action</h3><p>빠른 움직임도 예측형 추적과 스무딩으로 자연스럽게.</p></article>
+        </div>
+      </section>
+
+      <section className="plans" id="plans" aria-labelledby="plans-title">
+        <div className="plans-heading">
+          <p className="section-index">06 / CHOOSE YOUR EXPORT</p>
+          <h2 id="plans-title">분석과 미리보기는<br /><span>누구에게나 무료.</span></h2>
+          <p>횟수를 세지 않습니다. 무료 사용자는 워터마크가 포함된 720p 영상을 최대 30초까지 내보낼 수 있고, 선택형 광고를 보면 해당 1회의 워터마크를 제거할 수 있습니다.</p>
+        </div>
+        <div className="plan-grid">
+          <article className="plan-card">
+            <p>FREE</p><h3>$0</h3>
+            <ul><li>무제한 분석과 미리보기</li><li>기본 인물 추적과 리프레임</li><li>720p · 최대 30초</li><li>DynoCam 워터마크</li><li>광고 1회로 워터마크 제거</li></ul>
+          </article>
+          <article className="plan-card plan-pro">
+            <p>PRO</p><h3>$1.99 <small>/ month</small></h3>
+            <ul><li>1080p · 선택한 전체 구간</li><li>워터마크와 광고 없음</li><li>누락 구간 선형 보정</li><li>초기 위치 보정</li><li>정밀 재분석과 포즈 오버레이</li></ul>
+            <span className="yearly-price">Yearly · $14.99</span>
+          </article>
+        </div>
+      </section>
+
       <section className="closing" id="download" aria-labelledby="closing-title">
         <img className="closing-art" src="./images/climbing-motion-hero.png" alt="" />
         <div className="closing-overlay" />
@@ -288,7 +321,7 @@ export default function Home() {
           <img src="./images/dynocam-icon.png" alt="" />
           <span>DynoCam</span>
         </a>
-        <p>AI-powered climbing camera for iPhone &amp; iPad.</p>
+        <p>AI person tracking and automatic reframing for iPhone &amp; iPad.</p>
         <div>
           <span>© 2026 DynoCam</span>
           <a href="./support/">Support</a>
