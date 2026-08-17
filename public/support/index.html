@@ -1,17 +1,79 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="DynoCam support, troubleshooting, and contact information." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="DynoCam support for subject selection, Follow Styles, live framing, Best Moment, exports, and purchases." />
   <title>Support — DynoCam</title>
-  <style>:root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#07070a;color:#f5f4f7}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#25183b 0,transparent 36%),#07070a}main{width:min(780px,calc(100% - 40px));margin:auto;padding:70px 0 100px}.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-weight:750}.brand img{width:42px;border-radius:11px}h1{font-size:clamp(48px,9vw,76px);letter-spacing:-.055em;margin:70px 0 18px}.lead{color:#b8b4bf;font-size:19px;line-height:1.7}.card{margin-top:32px;padding:28px;border:1px solid #383240;border-radius:24px;background:#111016}.card h2{margin-top:0}.card p,.card li{color:#b8b4bf;line-height:1.7}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.actions a{padding:12px 18px;border-radius:99px;background:#fff;color:#09090c;text-decoration:none;font-weight:750}.actions a.secondary{background:#27222e;color:#eee9f4}footer{margin-top:70px;padding-top:28px;border-top:1px solid #29262e;color:#77717e}footer a{color:#b6acbf}</style>
+  <link rel="icon" href="../images/dynocam-icon.png" />
+  <link rel="stylesheet" href="../legal.css" />
+  <script src="../locale-page.js" defer></script>
 </head>
-<body><main>
-  <a class="brand" href="../"><img src="../images/dynocam-icon.png" alt="" />DynoCam</a>
-  <h1>DynoCam Support</h1>
-  <p class="lead">Help with person tracking, automatic reframing, exports, subscriptions, and the DynoCam app for iPhone and iPad.<br />인물 추적, 자동 리프레임, 저장 및 구독 관련 도움을 드립니다.</p>
-  <section class="card"><h2>Quick checks · 빠른 확인</h2><ul><li>Keep the main person visible at the beginning of the selected clip.</li><li>Use a well-lit video with a clear view of the person.</li><li>For long videos, first select only the section you need.</li><li>To save an export, allow Add Photos access in iOS Settings.</li><li>선택 구간 시작 부분에 추적할 사람이 선명하게 보이도록 해주세요.</li></ul></section>
-  <section class="card"><h2>Contact · 문의</h2><p>Please include your device, iOS version, DynoCam version, and the step where the issue occurs. Do not attach private videos to a public GitHub issue.</p><div class="actions"><a href="mailto:della.kimko@gmail.com?subject=DynoCam%20Support">Email support</a><a class="secondary" href="https://github.com/bbdyno/DynoCam-Site/issues/new">Public issue</a></div></section>
-  <section class="card"><h2>Privacy &amp; purchases</h2><p>Read how on-device video analysis, ML processing metrics, and purchases are handled. Subscription billing and refunds are managed by Apple.</p><div class="actions"><a class="secondary" href="../privacy/">Privacy policy</a><a class="secondary" href="https://support.apple.com/billing">Apple billing support</a></div></section>
-  <footer>© 2026 DynoCam · <a href="../">Home</a> · <a href="../privacy/">Privacy</a></footer>
-</main></body></html>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <a class="brand" data-localized-link href="../"><img src="../images/dynocam-icon.png" alt="" />DynoCam</a>
+      <a class="home-link" data-localized-link href="../">Home ↗</a>
+    </div>
+    <header class="hero">
+      <p class="eyebrow">DYNO CAM · SUPPORT</p>
+      <h1 data-page-heading>DynoCam Support</h1>
+      <p data-page-lead>Help with Follow Engine V2, Action Intelligence, live framing, Best Moment, exports, and purchases.</p>
+    </header>
+    <nav class="language" aria-label="Language">
+      <button type="button" data-locale-option="en">English</button>
+      <button type="button" data-locale-option="ko">한국어</button>
+      <button type="button" data-locale-option="ja">日本語</button>
+      <button type="button" data-locale-option="zh-Hans">简体中文</button>
+      <button type="button" data-locale-option="zh-Hant">繁體中文</button>
+    </nav>
+
+    <article class="locale-content" data-locale="en" data-title="DynoCam Support" data-lead="Help with Follow Engine V2, Action Intelligence, live framing, Best Moment, exports, and purchases." data-description="DynoCam support for tracking, live framing, Best Moment, exports, and purchases.">
+      <h2>English</h2>
+      <section><h3>Choose a clear subject</h3><ul><li>Keep the climber visible near the beginning of the selected clip.</li><li>Use a well-lit video where the subject is not fully blocked by another person or wall feature.</li><li>For a long recording, trim to the climb you need before starting full analysis.</li><li>If you need more than one person in frame, use Pro group tracking.</li></ul></section>
+      <section><h3>Follow Style and live framing</h3><p>Balanced is the best starting point for most climbs. Lead adds room in the direction of motion. Pro offers Smooth for a calmer camera and Action for faster response.</p><p>Ratio and frame-size changes update the actual camera path at the current playhead immediately. You do not need to scrub the playback bar to refresh the preview.</p></section>
+      <section><h3>Best Moment and exports</h3><p>Best Moment appears after DynoCam has enough motion information to suggest a strong seven-second section. Everyone can preview the suggestion; Pro can export it as a separate video.</p><ul><li>Allow Add Photos access in iOS Settings to save an export.</li><li>Free exports are 720p, up to 30 seconds, with a DynoCam watermark.</li><li>An optional rewarded ad enables one 1080p export up to 30 seconds without a watermark.</li><li>Pro exports the full selected clip at 1080p without ads or a watermark.</li></ul></section>
+      <section><h3>Purchases and privacy</h3><p>Use Restore Purchases on the Pro screen for an existing subscription. The optional Coffee Tip is a repeatable developer-support purchase and does not unlock features or Pro access.</p><p>Video analysis and export run on your device. For details about ML diagnostics, optional advertising, and purchases, read the <a data-localized-link href="../privacy/">Privacy Policy</a>.</p></section>
+      <section><h3>Contact</h3><p>Include your device model, iOS version, DynoCam version, and the step where the issue occurs. Do not attach private videos to a public issue.</p><div class="actions"><a href="mailto:della.kimko@gmail.com?subject=DynoCam%20Support">Email support</a><a class="secondary" href="https://github.com/bbdyno/DynoCam-Site/issues/new">Open a public issue</a></div></section>
+    </article>
+
+    <article class="locale-content" data-locale="ko" data-title="DynoCam 지원" data-lead="Follow Engine V2, Action Intelligence, 실시간 프레이밍, Best Moment, 내보내기와 구매를 안내합니다." data-description="추적, 실시간 프레이밍, Best Moment, 내보내기 및 구매를 위한 DynoCam 지원 안내입니다." hidden>
+      <h2>한국어</h2>
+      <section><h3>선명한 피사체를 선택하세요</h3><ul><li>선택 구간 시작 부분에서 클라이머가 보이도록 해주세요.</li><li>조명이 충분하고 다른 사람이나 홀드에 피사체가 완전히 가려지지 않은 영상을 사용하세요.</li><li>긴 영상은 전체 분석 전에 필요한 등반 구간부터 선택하세요.</li><li>화면에 여러 명을 함께 담아야 한다면 Pro 그룹 추적을 사용하세요.</li></ul></section>
+      <section><h3>Follow Style과 실시간 프레이밍</h3><p>대부분의 등반은 Balanced로 시작하는 것이 좋습니다. Lead는 진행 방향에 공간을 남깁니다. Pro의 Smooth는 카메라를 차분하게, Action은 다이내믹한 무브에 빠르게 반응시킵니다.</p><p>비율과 프레임 크기를 바꾸면 현재 재생 위치의 실제 카메라 패스가 즉시 갱신됩니다. 미리보기를 새로고침하기 위해 재생 바를 움직일 필요가 없습니다.</p></section>
+      <section><h3>Best Moment와 내보내기</h3><p>DynoCam이 충분한 움직임 정보를 분석하면 가장 강한 7초를 Best Moment로 제안합니다. 누구나 미리 볼 수 있고, Pro에서는 별도 영상으로 내보낼 수 있습니다.</p><ul><li>결과를 저장하려면 iOS 설정에서 사진 추가 권한을 허용하세요.</li><li>무료 내보내기는 최대 30초, 720p이며 DynoCam 워터마크가 포함됩니다.</li><li>선택형 리워드 광고로 최대 30초의 1080p 영상을 워터마크 없이 한 번 내보낼 수 있습니다.</li><li>Pro는 선택한 전체 구간을 1080p, 광고와 워터마크 없이 내보냅니다.</li></ul></section>
+      <section><h3>구매와 개인정보</h3><p>기존 구독은 Pro 화면의 구매 복원을 사용하세요. 선택형 Coffee Tip은 개발을 지원하는 반복 구매 상품이며 기능이나 Pro 이용 권한을 제공하지 않습니다.</p><p>영상 분석과 내보내기는 기기에서 실행됩니다. ML 진단, 선택형 광고, 구매에 관한 자세한 내용은 <a data-localized-link href="../privacy/">개인정보 처리방침</a>을 확인하세요.</p></section>
+      <section><h3>문의</h3><p>기기 모델, iOS 버전, DynoCam 버전, 문제가 발생한 단계를 함께 적어주세요. 공개 이슈에는 개인 영상을 첨부하지 마세요.</p><div class="actions"><a href="mailto:della.kimko@gmail.com?subject=DynoCam%20지원">이메일 문의</a><a class="secondary" href="https://github.com/bbdyno/DynoCam-Site/issues/new">공개 이슈 작성</a></div></section>
+    </article>
+
+    <article class="locale-content" data-locale="ja" data-title="DynoCamサポート" data-lead="Follow Engine V2、Action Intelligence、ライブフレーミング、Best Moment、書き出し、購入をご案内します。" data-description="追跡、ライブフレーミング、Best Moment、書き出し、購入に関するDynoCamサポートです。" hidden>
+      <h2>日本語</h2>
+      <section><h3>見やすい被写体を選択</h3><ul><li>選択区間の開始付近でクライマーが見えるようにしてください。</li><li>十分に明るく、他の人や壁の要素で被写体が完全に隠れない動画を使用してください。</li><li>長い動画は、フル解析の前に必要な登りの区間を選択してください。</li><li>複数人を同じフレームに収める場合はProのグループトラッキングを使用します。</li></ul></section>
+      <section><h3>Follow Styleとライブフレーミング</h3><p>多くの登りではBalancedから始めるのがおすすめです。Leadは進行方向に余白を残します。ProのSmoothは落ち着いたカメラ、Actionはダイナミックなムーブへの速い反応を提供します。</p><p>比率やフレームサイズを変えると、現在の再生位置にある実際のカメラパスが即時更新されます。プレビュー更新のために再生バーを動かす必要はありません。</p></section>
+      <section><h3>Best Momentと書き出し</h3><p>十分な動作情報が得られると、DynoCamが印象的な7秒間をBest Momentとして提案します。誰でもプレビューでき、Proでは別動画として書き出せます。</p><ul><li>保存するにはiOS設定で「写真に追加」のアクセスを許可してください。</li><li>無料書き出しは最大30秒、720p、DynoCamウォーターマーク付きです。</li><li>任意のリワード広告で、最大30秒の1080p動画を1回ウォーターマークなしで書き出せます。</li><li>Proは選択した全区間を1080p、広告・ウォーターマークなしで書き出します。</li></ul></section>
+      <section><h3>購入とプライバシー</h3><p>既存のサブスクリプションはPro画面の「購入を復元」を使用してください。Coffee Tipは開発を支援する任意の繰り返し購入で、機能やPro利用権は付与されません。</p><p>動画解析と書き出しは端末上で実行されます。ML診断、任意の広告、購入については<a data-localized-link href="../privacy/">プライバシーポリシー</a>をご確認ください。</p></section>
+      <section><h3>お問い合わせ</h3><p>端末モデル、iOSバージョン、DynoCamバージョン、問題が発生した手順を記載してください。公開Issueに個人動画を添付しないでください。</p><div class="actions"><a href="mailto:della.kimko@gmail.com?subject=DynoCam%20Support">メールで問い合わせ</a><a class="secondary" href="https://github.com/bbdyno/DynoCam-Site/issues/new">公開Issueを作成</a></div></section>
+    </article>
+
+    <article class="locale-content" data-locale="zh-Hans" data-title="DynoCam支持" data-lead="了解Follow Engine V2、Action Intelligence、实时取景、Best Moment、导出与购买。" data-description="DynoCam人物追踪、实时取景、Best Moment、导出与购买支持。" hidden>
+      <h2>简体中文</h2>
+      <section><h3>选择清晰可见的人物</h3><ul><li>请确保攀岩者在所选片段开始附近可见。</li><li>使用光线充足、人物未被其他人或墙面元素完全遮挡的视频。</li><li>较长的视频请先选择需要的攀爬片段，再开始完整分析。</li><li>需要同时保留多人时，请使用Pro多人追踪。</li></ul></section>
+      <section><h3>Follow Style与实时取景</h3><p>大多数攀爬建议从Balanced开始。Lead会在运动方向保留空间。Pro的Smooth让镜头更平稳，Action则更快响应动态动作。</p><p>修改画幅或画面大小后，当前播放位置的真实镜头路径会立即更新，无需拖动进度条刷新预览。</p></section>
+      <section><h3>Best Moment与导出</h3><p>获得足够的运动信息后，DynoCam会推荐最精彩的7秒作为Best Moment。所有人都可以预览，Pro可另存为独立视频。</p><ul><li>如需保存，请在iOS设置中允许“添加照片”权限。</li><li>免费导出最长30秒、720p，带DynoCam水印。</li><li>可选激励广告可解锁一次最长30秒、1080p、无水印导出。</li><li>Pro可将完整所选片段以1080p、无广告、无水印导出。</li></ul></section>
+      <section><h3>购买与隐私</h3><p>已有订阅请在Pro页面使用“恢复购买”。Coffee Tip是可重复购买的自愿开发支持，不会解锁功能或Pro权限。</p><p>视频分析和导出均在设备端完成。关于ML诊断、可选广告和购买的详情，请阅读<a data-localized-link href="../privacy/">隐私政策</a>。</p></section>
+      <section><h3>联系支持</h3><p>请提供设备型号、iOS版本、DynoCam版本以及出现问题的步骤。请勿在公开Issue中附上私人视频。</p><div class="actions"><a href="mailto:della.kimko@gmail.com?subject=DynoCam%20Support">邮件支持</a><a class="secondary" href="https://github.com/bbdyno/DynoCam-Site/issues/new">创建公开Issue</a></div></section>
+    </article>
+
+    <article class="locale-content" data-locale="zh-Hant" data-title="DynoCam支援" data-lead="了解Follow Engine V2、Action Intelligence、即時取景、Best Moment、輸出與購買。" data-description="DynoCam人物追蹤、即時取景、Best Moment、輸出與購買支援。" hidden>
+      <h2>繁體中文</h2>
+      <section><h3>選擇清楚可見的人物</h3><ul><li>請確保攀岩者在所選片段開始附近可見。</li><li>使用光線充足、人物未被其他人或牆面元素完全遮擋的影片。</li><li>較長的影片請先選擇需要的攀爬片段，再開始完整分析。</li><li>需要同時保留多人時，請使用Pro多人追蹤。</li></ul></section>
+      <section><h3>Follow Style與即時取景</h3><p>大多數攀爬建議從Balanced開始。Lead會在移動方向保留空間。Pro的Smooth讓鏡頭更平穩，Action則更快回應動態動作。</p><p>變更畫幅或畫面大小後，目前播放位置的真實鏡頭路徑會立即更新，無須拖動進度列重新整理預覽。</p></section>
+      <section><h3>Best Moment與輸出</h3><p>取得足夠的動作資訊後，DynoCam會推薦最精彩的7秒作為Best Moment。所有人都可以預覽，Pro可另存為獨立影片。</p><ul><li>如需儲存，請在iOS設定中允許「加入照片」權限。</li><li>免費輸出最長30秒、720p，帶DynoCam浮水印。</li><li>可選獎勵式廣告可解鎖一次最長30秒、1080p、無浮水印輸出。</li><li>Pro可將完整所選片段以1080p、無廣告、無浮水印輸出。</li></ul></section>
+      <section><h3>購買與隱私權</h3><p>已有訂閱請在Pro頁面使用「恢復購買」。Coffee Tip是可重複購買的自願開發支援，不會解鎖功能或Pro權限。</p><p>影片分析和輸出均在裝置端完成。關於ML診斷、可選廣告和購買的詳情，請閱讀<a data-localized-link href="../privacy/">隱私權政策</a>。</p></section>
+      <section><h3>聯絡支援</h3><p>請提供裝置型號、iOS版本、DynoCam版本以及出現問題的步驟。請勿在公開Issue中附上私人影片。</p><div class="actions"><a href="mailto:della.kimko@gmail.com?subject=DynoCam%20Support">Email支援</a><a class="secondary" href="https://github.com/bbdyno/DynoCam-Site/issues/new">建立公開Issue</a></div></section>
+    </article>
+
+    <footer>© 2026 DynoCam <a data-localized-link href="../">Home</a><a data-localized-link href="../privacy/">Privacy</a></footer>
+  </main>
+</body>
+</html>

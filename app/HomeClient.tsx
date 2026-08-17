@@ -1,331 +1,294 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { copy, localeLabels, locales, resolveLocale, type Locale } from "./i18n";
 
-const productScreens = [
-  {
-    id: "trim",
-    eyebrow: "01 · TRIM",
-    title: "필요한 순간만\n정확하게.",
-    body: "타임라인과 파형을 보며 분석할 구간을 빠르게 선택하세요.",
-    src: "./images/screens/iphone-trim.png",
-  },
-  {
-    id: "track",
-    eyebrow: "02 · TRACK",
-    title: "AI가 움직임을\n읽어냅니다.",
-    body: "사람을 찾고 포즈를 감지해, 클라이밍부터 댄스와 스포츠까지 움직임의 경로를 만듭니다.",
-    src: "./images/screens/iphone-processing.png",
-  },
-  {
-    id: "frame",
-    eyebrow: "03 · FRAME",
-    title: "주인공은 언제나\n화면의 중심에.",
-    body: "3:4, 4:5, 9:16 비율과 크롭 크기, 카메라 움직임을 조절하세요.",
-    src: "./images/screens/iphone-editor.png",
-  },
+const appStoreUrl = "https://apps.apple.com/app/id6800616313";
+const screenshotSources = [
+  "./images/release/01-choose-subject.png",
+  "./images/release/02-motion-analysis.png",
+  "./images/release/03-follow-style.png",
+  "./images/release/04-live-frame.png",
+  "./images/release/05-best-moment.png",
 ] as const;
 
-function PhoneFrame({
-  src,
-  className = "",
-  label,
-}: {
-  src: string;
-  className?: string;
-  label: string;
-}) {
-  return (
-    <div className={`phone-frame ${className}`} aria-label={label}>
-      <span className="phone-button phone-button-left" aria-hidden="true" />
-      <span className="phone-button phone-button-right" aria-hidden="true" />
-      <div className="phone-glass">
-        <img src={src} alt={label} />
-      </div>
-    </div>
-  );
+function initialLocale(): Locale {
+  const query = resolveLocale(new URLSearchParams(window.location.search).get("lang"));
+  if (query) return query;
+
+  const saved = resolveLocale(window.localStorage.getItem("dynocam-locale"));
+  if (saved) return saved;
+
+  for (const language of navigator.languages) {
+    const detected = resolveLocale(language);
+    if (detected) return detected;
+  }
+  return "en";
 }
 
-function TabletFrame({
-  src,
-  className = "",
-  label,
-}: {
-  src: string;
-  className?: string;
-  label: string;
-}) {
-  return (
-    <div className={`tablet-frame ${className}`} aria-label={label}>
-      <span className="tablet-camera" aria-hidden="true" />
-      <div className="tablet-glass">
-        <img src={src} alt={label} />
-      </div>
-    </div>
-  );
+function updateDescription(description: string) {
+  const meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+  if (meta) meta.content = description;
 }
 
 export default function Home() {
-  const [activeScreen, setActiveScreen] = useState(0);
+  const [locale, setLocale] = useState<Locale>(initialLocale);
+  const [activeStep, setActiveStep] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const t = copy[locale];
+  const currentStep = t.tour.steps[activeStep];
+  const localizedPath = useMemo(() => `?lang=${encodeURIComponent(locale)}`, [locale]);
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+    document.title = t.meta.title;
+    updateDescription(t.meta.description);
+    window.localStorage.setItem("dynocam-locale", locale);
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("lang", locale);
+    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+  }, [locale, t.meta.description, t.meta.title]);
 
   useEffect(() => {
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const progress = max > 0 ? window.scrollY / max : 0;
-      document.documentElement.style.setProperty(
-        "--page-progress",
-        String(progress),
-      );
+      document.documentElement.style.setProperty("--page-progress", String(progress));
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const current = productScreens[activeScreen];
+  const selectLocale = (value: string) => {
+    const next = resolveLocale(value);
+    if (next) {
+      setLocale(next);
+      setMenuOpen(false);
+    }
+  };
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <main>
-      <div className="progress-rail" aria-hidden="true">
-        <span />
-      </div>
+      <div className="progress-rail" aria-hidden="true"><span /></div>
 
-      <nav className="site-nav" aria-label="주요 메뉴">
-        <a className="brand" href="#top" aria-label="DynoCam 홈">
-          <img src="./images/dynocam-icon.png" alt="" />
-          <span>DynoCam</span>
-        </a>
-        <button
-          className="menu-toggle"
-          type="button"
-          aria-expanded={menuOpen}
-          aria-controls="site-links"
-          onClick={() => setMenuOpen((value) => !value)}
-        >
-          <span />
-          <span />
-          <span className="sr-only">메뉴 열기</span>
-        </button>
-        <div className={`site-links ${menuOpen ? "is-open" : ""}`} id="site-links">
-          <a href="#experience" onClick={() => setMenuOpen(false)}>기능</a>
-          <a href="#devices" onClick={() => setMenuOpen(false)}>디바이스</a>
-          <a href="#technology" onClick={() => setMenuOpen(false)}>기술</a>
-          <a className="nav-cta" href="#download" onClick={() => setMenuOpen(false)}>App Store</a>
-        </div>
-      </nav>
+      <header className="site-header">
+        <nav className="site-nav" aria-label="DynoCam">
+          <a className="brand" href="#top" aria-label="DynoCam">
+            <img src="./images/dynocam-icon.png" alt="" />
+            <span>DynoCam</span>
+          </a>
+
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls="site-links"
+            aria-label={t.nav.menu}
+            onClick={() => setMenuOpen((value) => !value)}
+          >
+            <span /><span />
+          </button>
+
+          <div className={`site-links ${menuOpen ? "is-open" : ""}`} id="site-links">
+            <a href="#workflow" onClick={closeMenu}>{t.nav.workflow}</a>
+            <a href="#engine" onClick={closeMenu}>{t.nav.engine}</a>
+            <a href="#plans" onClick={closeMenu}>{t.nav.plans}</a>
+            <a href={`./support/${localizedPath}`} onClick={closeMenu}>{t.nav.support}</a>
+            <label className="language-picker">
+              <span className="sr-only">{t.nav.language}</span>
+              <select value={locale} onChange={(event) => selectLocale(event.target.value)} aria-label={t.nav.language}>
+                {locales.map((value) => <option key={value} value={value}>{localeLabels[value]}</option>)}
+              </select>
+            </label>
+            <a className="nav-cta" href={appStoreUrl}>{t.nav.appStore}<span aria-hidden="true">↗</span></a>
+          </div>
+        </nav>
+      </header>
 
       <section className="hero" id="top">
-        <img
-          className="hero-art"
-          src="./images/climbing-motion-hero.png"
-          alt="보라색 빛의 추적 경로가 이어진 추상적인 클라이밍 월"
-        />
+        <img className="hero-art" src="./images/climbing-motion-hero.png" alt="" />
         <div className="hero-vignette" aria-hidden="true" />
-        <div className="hero-orbit orbit-one" aria-hidden="true" />
-        <div className="hero-orbit orbit-two" aria-hidden="true" />
         <div className="hero-copy">
-          <p className="kicker"><span /> AI ACTION CAMERA</p>
-          <h1>
-            당신의 등반을,
-            <strong>한 편의 움직임으로.</strong>
-          </h1>
-          <p className="hero-description">
-            DynoCam은 영상 속 사람을 감지하고 움직임을 따라가며,
-            클라이밍·댄스·스포츠 영상을 몰입감 있는 세로 콘텐츠로 완성합니다.
-          </p>
+          <p className="kicker"><span aria-hidden="true" />{t.hero.eyebrow}</p>
+          <h1><span>{t.hero.title}</span><strong>{t.hero.accent}</strong></h1>
+          <p className="hero-description">{t.hero.body}</p>
           <div className="hero-actions">
-            <a className="primary-action" href="#experience">작동 방식 보기 <span>↓</span></a>
-            <a className="text-action" href="#download">App Store에서 보기 <span>↗</span></a>
+            <a className="primary-action" href="#workflow">{t.hero.primary}<span aria-hidden="true">↓</span></a>
+            <a className="secondary-action" href={appStoreUrl}>{t.hero.secondary}<span aria-hidden="true">↗</span></a>
           </div>
+          <p className="review-status"><span aria-hidden="true" />{t.hero.status}</p>
         </div>
-        <div className="hero-device-wrap" aria-hidden="true">
-          <div className="device-aura" />
-          <PhoneFrame
-            src="./images/screens/iphone-editor.png"
-            label="DynoCam 편집 화면이 표시된 iPhone"
-          />
-        </div>
-        <div className="scroll-cue" aria-hidden="true">
-          <span>SCROLL TO FOLLOW</span>
-          <i />
+        <div className="hero-product">
+          <div className="hero-product-glow" aria-hidden="true" />
+          <img src={screenshotSources[2]} alt={t.hero.imageAlt} />
         </div>
       </section>
 
-      <section className="statement" aria-labelledby="statement-title">
-        <p className="section-index">01 / THE IDEA</p>
-        <h2 id="statement-title">
-          카메라는 멈춰 있어도,
-          <span>프레임은 당신을 따라갑니다.</span>
-        </h2>
-        <div className="statement-grid">
-          <p>
-            삼각대에 세워둔 영상도 충분합니다. DynoCam이 사람의 위치와
-            포즈를 기기 안에서 분석해 매 순간 새로운 카메라 프레임을 계산합니다.
-          </p>
-          <div className="metric-row" aria-label="제품 주요 수치">
-            <div><strong>3</strong><span>출력 화면비</span></div>
-            <div><strong>4</strong><span>AI 분석 단계</span></div>
-            <div><strong>1</strong><span>탭으로 분석</span></div>
-          </div>
-        </div>
+      <section className="proof-strip" aria-label={t.proofLabel}>
+        {t.proofs.map((proof) => (
+          <article key={proof.value}>
+            <strong>{proof.value}</strong>
+            <span>{proof.label}</span>
+          </article>
+        ))}
       </section>
 
-      <section className="experience" id="experience" aria-labelledby="experience-title">
-        <div className="experience-heading">
-          <p className="section-index">02 / HOW IT WORKS</p>
-          <h2 id="experience-title">세 단계면 충분합니다.</h2>
+      <section className="statement section-shell" aria-labelledby="statement-title">
+        <p className="section-index">{t.statement.index}</p>
+        <h2 id="statement-title"><span>{t.statement.title}</span><strong>{t.statement.accent}</strong></h2>
+        <p>{t.statement.body}</p>
+      </section>
+
+      <section className="tour section-shell" id="workflow" aria-labelledby="tour-title">
+        <div className="section-heading">
+          <p className="section-index">{t.tour.index}</p>
+          <h2 id="tour-title">{t.tour.title}</h2>
+          <p>{t.tour.body}</p>
         </div>
-        <div className="experience-stage">
-          <div className="experience-copy" aria-live="polite">
-            <p className="experience-eyebrow">{current.eyebrow}</p>
-            <h3>{current.title.split("\n").map((line) => <span key={line}>{line}</span>)}</h3>
-            <p>{current.body}</p>
-            <div className="screen-tabs" role="tablist" aria-label="DynoCam 사용 단계">
-              {productScreens.map((screen, index) => (
+
+        <div className="tour-layout">
+          <div className="tour-visual" aria-live="polite">
+            <img key={screenshotSources[activeStep]} src={screenshotSources[activeStep]} alt={currentStep.alt} />
+          </div>
+          <div className="tour-copy">
+            <p className="tour-count">{String(activeStep + 1).padStart(2, "0")} / 05</p>
+            <h3>{currentStep.title}</h3>
+            <p>{currentStep.body}</p>
+            <div className="tour-tabs" role="tablist" aria-label={t.tour.tabLabel}>
+              {t.tour.steps.map((step, index) => (
                 <button
-                  key={screen.id}
+                  key={step.id}
                   type="button"
                   role="tab"
-                  aria-selected={activeScreen === index}
-                  onClick={() => setActiveScreen(index)}
+                  aria-selected={activeStep === index}
+                  onClick={() => setActiveStep(index)}
                 >
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  {screen.id === "trim" ? "구간 선택" : screen.id === "track" ? "AI 추적" : "프레임 편집"}
+                  <span>{String(index + 1).padStart(2, "0")}</span>{step.label}
                 </button>
               ))}
             </div>
           </div>
-          <div className="experience-device">
-            <div className="tracking-ring ring-a" aria-hidden="true" />
-            <div className="tracking-ring ring-b" aria-hidden="true" />
-            <PhoneFrame
-              key={current.src}
-              src={current.src}
-              className="screen-swap"
-              label={`DynoCam ${current.eyebrow} 실제 앱 화면`}
-            />
-            <span className="tracking-badge badge-top">POSE · 61%</span>
-            <span className="tracking-badge badge-bottom">CENTER LOCKED</span>
-          </div>
         </div>
       </section>
 
-      <section className="vision" id="technology" aria-labelledby="vision-title">
-        <div className="vision-art" aria-hidden="true">
-          <div className="hold hold-a" />
-          <div className="hold hold-b" />
-          <div className="hold hold-c" />
-          <div className="hold hold-d" />
-          <div className="path-line path-line-one" />
-          <div className="path-line path-line-two" />
-          <div className="target-dot dot-one" />
-          <div className="target-dot dot-two" />
-          <div className="target-dot dot-three" />
+      <section className="engine section-shell" id="engine" aria-labelledby="engine-title">
+        <div className="engine-heading">
+          <p className="section-index">{t.engine.index}</p>
+          <h2 id="engine-title"><span>{t.engine.title}</span><strong>{t.engine.accent}</strong></h2>
+          <p>{t.engine.body}</p>
         </div>
-        <div className="vision-copy">
-          <p className="section-index">03 / COMPUTER VISION</p>
-          <h2 id="vision-title">사람을 찾고.<br />포즈를 읽고.<br /><span>움직임을 예측합니다.</span></h2>
-          <p>
-            사람 검출과 포즈 추정을 결합해 주인공의 중심을 계산하고,
-            급격한 이동은 부드러운 카메라 경로로 바꿉니다.
-          </p>
-          <ul>
-            <li><span>01</span>Person detection</li>
-            <li><span>02</span>Pose estimation</li>
-            <li><span>03</span>Trajectory smoothing</li>
-          </ul>
+        <div className="path-visual" aria-hidden="true">
+          <span className="path-grid" />
+          <span className="subject-path" />
+          <span className="camera-path" />
+          <i className="path-point point-one" /><i className="path-point point-two" /><i className="path-point point-three" />
+          <b>SUBJECT PATH</b><b>CAMERA PATH</b>
+        </div>
+        <div className="engine-features">
+          {t.engine.features.map((feature, index) => (
+            <article key={feature.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{feature.title}</h3>
+              <p>{feature.body}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="devices" id="devices" aria-labelledby="devices-title">
+      <section className="styles section-shell" aria-labelledby="styles-title">
+        <div className="section-heading compact-heading">
+          <p className="section-index">{t.styles.index}</p>
+          <h2 id="styles-title">{t.styles.title}</h2>
+          <p>{t.styles.body}</p>
+        </div>
+        <div className="style-grid">
+          {t.styles.items.map((style) => (
+            <article key={style.name}>
+              <div><span className="style-dot" aria-hidden="true" /><strong>{style.name}</strong>{style.pro && <em>{t.styles.pro}</em>}</div>
+              <h3>{style.title}</h3>
+              <p>{style.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="action-section section-shell" aria-labelledby="action-title">
+        <div className="action-heading">
+          <p className="section-index">{t.action.index}</p>
+          <h2 id="action-title"><span>{t.action.title}</span><strong>{t.action.accent}</strong></h2>
+          <p>{t.action.body}</p>
+        </div>
+        <div className="action-grid">
+          <article className="action-framing">
+            <p>01</p><h3>{t.action.framingTitle}</h3><span>{t.action.framingBody}</span>
+            <div className="framing-demo" aria-hidden="true"><i /><i /></div>
+          </article>
+          <article className="best-moment">
+            <p>02</p><h3>{t.action.momentTitle}</h3><span>{t.action.momentBody}</span>
+            <div className="moment-time" aria-hidden="true"><strong>7</strong><small>SEC</small><em>{t.action.seconds}</em></div>
+          </article>
+        </div>
+      </section>
+
+      <section className="devices section-shell" aria-labelledby="devices-title">
         <div className="devices-copy">
-          <p className="section-index">04 / EVERY SCREEN</p>
-          <h2 id="devices-title">iPhone에서 시작하고.<br /><span>iPad에서 더 크게.</span></h2>
-          <p>같은 영상, 같은 분석, 더 넓은 편집 공간. 어느 기기에서든 DynoCam의 흐름은 그대로 이어집니다.</p>
+          <p className="section-index">{t.devices.index}</p>
+          <h2 id="devices-title"><span>{t.devices.title}</span><strong>{t.devices.accent}</strong></h2>
+          <p>{t.devices.body}</p>
         </div>
-        <div className="device-pair">
-          <TabletFrame src="./images/screens/ipad-editor.png" label="DynoCam이 실행 중인 iPad 편집 화면" />
-          <PhoneFrame src="./images/screens/iphone-trim.png" label="DynoCam이 실행 중인 iPhone 트림 화면" />
-          <div className="pair-shadow" aria-hidden="true" />
+        <div className="devices-visual">
+          <img src="./images/release/ipad-live-frame.png" alt={t.devices.imageAlt} />
         </div>
       </section>
 
-      <section className="feature-grid" aria-label="DynoCam 주요 기능">
-        <article className="feature-card feature-wide">
-          <p>FRAME RATIOS</p>
-          <h3>세로 콘텐츠에 맞춘<br />세 가지 프레임.</h3>
-          <div className="ratio-visual" aria-hidden="true">
-            <span className="ratio-34">3:4</span>
-            <span className="ratio-45">4:5</span>
-            <span className="ratio-916">9:16</span>
-          </div>
-        </article>
-        <article className="feature-card feature-dark">
-          <p>CAMERA MOTION</p>
-          <h3>자연스럽게.<br />혹은 예측적으로.</h3>
-          <div className="motion-curve" aria-hidden="true"><i /><i /><i /><i /></div>
-        </article>
-        <article className="feature-card feature-light">
-          <p>TRACKING POSITION</p>
-          <h3>상체부터 골반까지.<br />움직임의 기준도 자유롭게.</h3>
-          <div className="pose-mark" aria-hidden="true">
-            <i className="pose-head" /><i className="pose-body" /><i className="pose-arm-left" />
-            <i className="pose-arm-right" /><i className="pose-leg-left" /><i className="pose-leg-right" />
-          </div>
-        </article>
-      </section>
-
-      <section className="use-cases" aria-labelledby="use-cases-title">
-        <div className="use-cases-heading">
-          <p className="section-index">05 / MADE TO MOVE</p>
-          <h2 id="use-cases-title">어떤 움직임이든.<br /><span>한 사람에게 집중합니다.</span></h2>
-          <p>볼더링과 리드 클라이밍, 댄스 연습, 홈 트레이닝, 스케이트와 액션 스포츠까지. 사람이 선명하게 보이는 영상이라면 DynoCam의 자동 리프레임을 사용할 수 있습니다.</p>
-        </div>
-        <div className="use-case-grid">
-          <article><span>01</span><h3>Climbing</h3><p>등반자의 수직·수평 이동을 놓치지 않는 세로 프레임.</p></article>
-          <article><span>02</span><h3>Dance</h3><p>안무의 동선을 따라가는 부드러운 카메라 움직임.</p></article>
-          <article><span>03</span><h3>Training</h3><p>운동 자세와 반복 동작을 보기 쉬운 화면으로 정리.</p></article>
-          <article><span>04</span><h3>Action</h3><p>빠른 움직임도 예측형 추적과 스무딩으로 자연스럽게.</p></article>
-        </div>
-      </section>
-
-      <section className="plans" id="plans" aria-labelledby="plans-title">
-        <div className="plans-heading">
-          <p className="section-index">06 / CHOOSE YOUR EXPORT</p>
-          <h2 id="plans-title">분석과 미리보기는<br /><span>누구에게나 무료.</span></h2>
-          <p>횟수를 세지 않습니다. 무료 사용자는 워터마크가 포함된 720p 영상을 최대 30초까지 내보낼 수 있고, 선택형 광고를 보면 해당 1회의 워터마크를 제거할 수 있습니다.</p>
+      <section className="plans section-shell" id="plans" aria-labelledby="plans-title">
+        <div className="section-heading">
+          <p className="section-index">{t.plans.index}</p>
+          <h2 id="plans-title"><span>{t.plans.title}</span><strong>{t.plans.accent}</strong></h2>
+          <p>{t.plans.body}</p>
         </div>
         <div className="plan-grid">
-          <article className="plan-card">
-            <p>FREE</p><h3>$0</h3>
-            <ul><li>무제한 분석과 미리보기</li><li>기본 인물 추적과 리프레임</li><li>720p · 최대 30초</li><li>DynoCam 워터마크</li><li>광고 1회로 워터마크 제거</li></ul>
-          </article>
-          <article className="plan-card plan-pro">
-            <p>PRO</p><h3>$1.99 <small>/ month</small></h3>
-            <ul><li>1080p · 선택한 전체 구간</li><li>워터마크와 광고 없음</li><li>누락 구간 선형 보정</li><li>초기 위치 보정</li><li>정밀 재분석과 포즈 오버레이</li></ul>
-            <span className="yearly-price">Yearly · $14.99</span>
-          </article>
+          {t.plans.items.map((plan) => (
+            <article key={plan.name} className={plan.featured ? "featured" : ""}>
+              <p>{plan.name}</p>
+              <h3>{plan.headline}</h3>
+              <ul>{plan.items.map((item) => <li key={item}>{item}</li>)}</ul>
+            </article>
+          ))}
+        </div>
+        <p className="plan-note">{t.plans.note}</p>
+      </section>
+
+      <section className="privacy section-shell" aria-labelledby="privacy-title">
+        <div>
+          <p className="section-index">{t.privacy.index}</p>
+          <h2 id="privacy-title"><span>{t.privacy.title}</span><strong>{t.privacy.accent}</strong></h2>
+        </div>
+        <div>
+          <p>{t.privacy.body}</p>
+          <a href={`./privacy/${localizedPath}`}>{t.privacy.link}<span aria-hidden="true">↗</span></a>
         </div>
       </section>
 
-      <section className="closing" id="download" aria-labelledby="closing-title">
+      <section className="closing" aria-labelledby="closing-title">
         <img className="closing-art" src="./images/climbing-motion-hero.png" alt="" />
-        <div className="closing-overlay" />
-        <img className="closing-icon" src="./images/dynocam-icon.png" alt="DynoCam 앱 아이콘" />
-        <p>COMING SOON ON THE APP STORE</p>
-        <h2 id="closing-title">등반을 기록하는<br />새로운 시선.</h2>
-        <a href="https://apps.apple.com/app/id6800616313">App Store에서 보기 <span>↗</span></a>
+        <div className="closing-shade" aria-hidden="true" />
+        <img className="closing-icon" src="./images/dynocam-icon.png" alt="DynoCam" />
+        <p>{t.closing.status}</p>
+        <h2 id="closing-title"><span>{t.closing.title}</span><strong>{t.closing.accent}</strong></h2>
+        <span className="closing-body">{t.closing.body}</span>
+        <a href={appStoreUrl}>{t.closing.action}<span aria-hidden="true">↗</span></a>
       </section>
 
       <footer>
-        <a className="brand footer-brand" href="#top">
-          <img src="./images/dynocam-icon.png" alt="" />
-          <span>DynoCam</span>
-        </a>
-        <p>AI person tracking and automatic reframing for iPhone &amp; iPad.</p>
-        <div>
+        <a className="brand footer-brand" href="#top"><img src="./images/dynocam-icon.png" alt="" /><span>DynoCam</span></a>
+        <div className="footer-copy"><p>{t.footer.tagline}</p><span>{t.footer.review}</span></div>
+        <div className="footer-links">
+          <a href={`./support/${localizedPath}`}>{t.footer.support}</a>
+          <a href={`./privacy/${localizedPath}`}>{t.footer.privacy}</a>
           <span>© 2026 DynoCam</span>
-          <a href="./support/">Support</a>
-          <a href="./privacy/">Privacy</a>
         </div>
       </footer>
     </main>

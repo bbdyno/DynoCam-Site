@@ -5,8 +5,8 @@
 <h1 align="center">DynoCam</h1>
 
 <p align="center">
-  <strong>당신의 움직임을, 한 편의 영상으로.</strong><br>
-  영상 속 사람을 추적해 자동으로 세로 리프레임하는 iPhone·iPad용 AI 카메라입니다.
+  <strong>최고의 무브는 이미 담겨 있습니다. 이제 카메라를 연출하세요.</strong><br>
+  고정 촬영한 클라이밍 영상을 자연스러운 Follow Cam으로 만드는 iPhone·iPad용 AI 카메라 오퍼레이터입니다.
 </p>
 
 <p align="center">
@@ -22,17 +22,19 @@
 
 ## 서비스 소개
 
-삼각대에 세워둔 고정 영상에서도 주인공은 계속 움직입니다. DynoCam은 사람 검출과 포즈 추정을 결합해 이동 경로를 분석하고, 매 순간 새로운 카메라 프레임을 계산합니다. 클라이밍뿐 아니라 댄스, 피트니스, 스케이트와 여러 액션 스포츠 영상에 사용할 수 있습니다.
+삼각대에 세워둔 고정 영상에서도 클라이머는 계속 움직입니다. DynoCam은 사람 검출, 포즈 추정, Action Intelligence를 결합해 등반을 분석하고 카메라 경로를 설계합니다.
 
-복잡한 편집 도구 없이 영상 구간을 고르고 원하는 비율을 선택하면, 클라이머를 중심에 둔 몰입감 있는 세로 영상을 만들 수 있습니다.
+Follow Engine V2는 클라이머 경로와 카메라 경로를 분리합니다. 작은 흔들림은 줄이고 다음 무브는 미리 읽으며, 팬과 줌을 따로 제어해 단순 자동 크롭보다 자연스러운 Follow Cam을 만듭니다.
 
 ## 주요 기능
 
-- **AI 인물 추적** — 사람과 포즈를 감지해 이동 경로를 계산합니다.
-- **영상 구간 선택** — 타임라인과 오디오 파형으로 분석할 구간을 정밀하게 선택합니다.
+- **Follow Engine V2** — Dead Zone, Offline Look Ahead, Lead Room, 팬·줌 독립 제어로 카메라 패스를 만듭니다.
+- **네 가지 Follow Style** — Balanced, Lead, Smooth(Pro), Action(Pro)으로 카메라 반응을 연출합니다.
+- **Action Intelligence** — 역동적인 신체 움직임을 온디바이스로 인식하고 큰 무브에 맞춰 화면을 조절합니다.
+- **Best Moment** — 가장 강한 7초를 추천하며 누구나 미리 보고 Pro에서 별도 영상으로 내보낼 수 있습니다.
 - **세 가지 출력 비율** — `3:4`, `4:5`, `9:16` 세로 콘텐츠에 맞춘 프레임을 제공합니다.
-- **카메라 움직임 조절** — 기본 및 예측형 카메라 움직임과 부드러움을 조절합니다.
-- **추적 기준점 선택** — 상체, 몸통, 골반 등 움직임의 중심을 직접 선택합니다.
+- **실시간 카메라 패스 조절** — 재생 바를 다시 움직이지 않아도 비율과 프레임 크기 변경을 현재 화면에서 바로 확인합니다.
+- **보정 및 정밀 분석** — 신뢰도가 낮거나 급격한 구간을 확인하고 Pro에서 범위 보정과 정밀 재분석을 실행합니다.
 - **iPhone·iPad 지원** — 동일한 분석 흐름을 모바일과 넓은 편집 화면에서 사용할 수 있습니다.
 
 ## Free와 Pro
@@ -45,21 +47,18 @@
 | 출력 화질 | 720p | 1080p |
 | 출력 길이 | 최대 30초 | 선택한 전체 구간 |
 | 워터마크 | 포함 | 없음 |
-| 선택형 광고 | 1회 시청 시 해당 출력의 워터마크 제거 | 없음 |
-| 선형 보정·초기 위치·정밀 재분석·포즈 오버레이 | — | 포함 |
+| 선택형 광고 | 1회 시청 시 1080p·최대 30초·워터마크 없는 출력 | 없음 |
+| 고급 Follow Style·Action Framing·Best Moment 출력·그룹 추적·보정·정밀 재분석·포즈 오버레이·조건부 업스케일링 | — | 포함 |
 
-- Pro Monthly: **US$1.99/month**
-- Pro Yearly: **US$14.99/year**
-
-실제 가격과 통화는 App Store 국가 또는 지역에 따라 표시됩니다.
+Pro는 월간과 연간 플랜으로 제공되며 실제 가격과 통화는 App Store 국가 또는 지역에 따라 앱 안에 표시됩니다.
 
 ## 실제 앱 화면
 
 <table>
   <tr>
-    <td align="center"><img src="public/images/screens/iphone-trim.png" width="260" alt="영상 자르기"><br><strong>구간 선택</strong></td>
-    <td align="center"><img src="public/images/screens/iphone-processing.png" width="260" alt="AI 분석"><br><strong>AI 분석</strong></td>
-    <td align="center"><img src="public/images/screens/iphone-editor.png" width="260" alt="프레임 편집"><br><strong>프레임 편집</strong></td>
+    <td align="center"><img src="public/images/release/01-choose-subject.png" width="260" alt="클라이머 선택"><br><strong>클라이머 선택</strong></td>
+    <td align="center"><img src="public/images/release/03-follow-style.png" width="260" alt="Follow Style"><br><strong>Follow Style</strong></td>
+    <td align="center"><img src="public/images/release/05-best-moment.png" width="260" alt="Best Moment"><br><strong>Best Moment</strong></td>
   </tr>
 </table>
 
@@ -67,7 +66,7 @@
 
 | 항목 | 내용 |
 |---|---|
-| 심사 중인 버전 | `1.0` (build 33) · Waiting for Review |
+| 심사 중인 버전 | `1.0` (build 38) · Waiting for Review |
 | 지원 기기 | iPhone, iPad |
 | 제품 사이트 | [bbdyno.github.io/DynoCam-Site](https://bbdyno.github.io/DynoCam-Site/) |
 | App Store | [apps.apple.com/app/id6800616313](https://apps.apple.com/app/id6800616313) · 심사 중, 승인 후 자동 출시 |
@@ -75,7 +74,7 @@
 
 ## 출시 후 후속 작업
 
-승인 후에는 App Store 공개 여부와 두 Pro 구독의 판매 상태를 확인하고,
+승인 후에는 App Store 공개 여부, 두 Pro 구독, Coffee Tip의 판매 상태를 확인하고,
 AdMob 앱을 공개된 App Store 목록에 연결합니다. 이어서 실기기에서 무료
 워터마크 출력, 선택형 리워드 출력, Pro 무광고 출력과 구매 복원을 검증한 뒤
 이 README의 `In Review` 표시를 실제 다운로드 링크로 전환합니다.
@@ -103,7 +102,8 @@ npm run build:pages
 - React 19
 - TypeScript
 - React / Vite
-- CSS 기반 반응형 모션 및 디바이스 프레임
+- 5개 언어 자동 감지 및 수동 전환
+- CSS 기반 반응형 모션과 실제 App Store 기기 프레임 이미지
 - GitHub Actions / GitHub Pages
 
 ## 개인정보와 광고

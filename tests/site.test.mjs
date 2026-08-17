@@ -4,54 +4,77 @@ import test from "node:test";
 
 const root = new URL("../", import.meta.url);
 
-test("publishes DynoCam product content and real app screens", async () => {
-  const [client, html, css, config] = await Promise.all([
+test("publishes the build 38 product story in five complete locales", async () => {
+  const [client, translations, html] = await Promise.all([
     readFile(new URL("app/HomeClient.tsx", root), "utf8"),
+    readFile(new URL("app/i18n.ts", root), "utf8"),
     readFile(new URL("index.html", root), "utf8"),
-    readFile(new URL("app/globals.css", root), "utf8"),
-    readFile(new URL("vite.config.ts", root), "utf8"),
   ]);
 
-  assert.match(client, /당신의 등반을/);
-  assert.match(client, /iphone-editor\.png/);
-  assert.match(client, /ipad-editor\.png/);
-  assert.match(client, /AI ACTION CAMERA/);
-  assert.match(client, /광고 1회로 워터마크 제거/);
-  assert.match(client, /Climbing/);
-  assert.match(client, /Dance/);
-  assert.match(html, /AI Person Tracking/);
-  assert.match(html, /bbdyno\.github\.io\/DynoCam-Site\/og\.png/);
-  assert.match(css, /prefers-reduced-motion/);
-  assert.match(config, /base:\s*"\/DynoCam-Site\/"/);
-  assert.doesNotMatch(client, /SkeletonPreview|codex-preview/);
+  for (const locale of ["en", "ko", "ja", "zh-Hans", "zh-Hant"]) {
+    assert.match(translations, new RegExp(`(?:"${locale}"|${locale}):`));
+  }
+  assert.match(translations, /Follow Engine V2/);
+  assert.match(translations, /Action Intelligence/);
+  assert.match(translations, /Best Moment/);
+  assert.match(translations, /재생 바를 움직이지 않아도/);
+  assert.match(client, /screenshotSources/);
+  assert.match(client, /ipad-live-frame\.png/);
+  assert.match(client, /dynocam-locale/);
+  assert.match(html, /hreflang="zh-Hant"/);
+  assert.match(html, /AI Camera Operator for Climbing Videos/);
+  assert.doesNotMatch(client, /PhoneFrame|TabletFrame/);
 });
 
-test("publishes the free, Pro, rewarded ad, and privacy contract", async () => {
-  const [client, privacy, readme] = await Promise.all([
-    readFile(new URL("app/HomeClient.tsx", root), "utf8"),
+test("states the current Free, rewarded, Pro, privacy, and review contract", async () => {
+  const [translations, privacy, support, readme] = await Promise.all([
+    readFile(new URL("app/i18n.ts", root), "utf8"),
     readFile(new URL("public/privacy/index.html", root), "utf8"),
+    readFile(new URL("public/support/index.html", root), "utf8"),
     readFile(new URL("README.md", root), "utf8"),
   ]);
 
-  assert.match(client, /720p/);
-  assert.match(client, /30초/);
-  assert.match(client, /1080p/);
-  assert.match(client, /\$1\.99/);
-  assert.match(client, /\$14\.99/);
+  assert.match(translations, /720p/);
+  assert.match(translations, /1080p/);
+  assert.match(translations, /30 seconds/);
+  assert.match(translations, /Monthly and annual Pro plans/);
+  assert.doesNotMatch(translations, /\$1\.99|\$14\.99/);
   assert.match(privacy, /Google Mobile Ads/);
   assert.match(privacy, /Google User Messaging Platform/);
-  assert.match(privacy, /광고를 거절했거나 이용할 수 없는 경우/);
-  assert.match(readme, /분석과 미리보기에는 횟수 제한이 없습니다/);
+  assert.match(privacy, /Coffee Tip/);
+  assert.match(privacy, /does not upload your source or exported videos/);
+  assert.match(support, /current playhead immediately/);
+  assert.match(support, /Best Moment/);
+  assert.match(readme, /build 38/i);
 });
 
-test("includes production media and GitHub Pages workflow", async () => {
+test("localizes support and privacy across all App Store locales", async () => {
+  const [privacy, support, localeScript] = await Promise.all([
+    readFile(new URL("public/privacy/index.html", root), "utf8"),
+    readFile(new URL("public/support/index.html", root), "utf8"),
+    readFile(new URL("public/locale-page.js", root), "utf8"),
+  ]);
+
+  for (const locale of ["en", "ko", "ja", "zh-Hans", "zh-Hant"]) {
+    const marker = `data-locale="${locale}"`;
+    assert.ok(privacy.includes(marker));
+    assert.ok(support.includes(marker));
+  }
+  assert.match(localeScript, /navigator\.languages/);
+  assert.match(localeScript, /localStorage\.getItem\("dynocam-locale"\)/);
+  assert.match(localeScript, /aria-pressed/);
+});
+
+test("includes release media and the GitHub Pages workflow", async () => {
   const required = [
     "public/images/climbing-motion-hero.png",
     "public/images/dynocam-icon.png",
-    "public/images/screens/iphone-trim.png",
-    "public/images/screens/iphone-processing.png",
-    "public/images/screens/iphone-editor.png",
-    "public/images/screens/ipad-editor.png",
+    "public/images/release/01-choose-subject.png",
+    "public/images/release/02-motion-analysis.png",
+    "public/images/release/03-follow-style.png",
+    "public/images/release/04-live-frame.png",
+    "public/images/release/05-best-moment.png",
+    "public/images/release/ipad-live-frame.png",
     "public/og.png",
     "scripts/prepare-pages.mjs",
     ".github/workflows/deploy-pages.yml",
@@ -59,15 +82,23 @@ test("includes production media and GitHub Pages workflow", async () => {
   await Promise.all(required.map((path) => access(new URL(path, root))));
 });
 
-test("prepares the project-path static export for GitHub Pages", async () => {
-  const [packageJson, prepareScript, workflow] = await Promise.all([
+test("keeps responsive, accessible, project-path-safe output", async () => {
+  const [css, packageJson, prepareScript, workflow, config, html] = await Promise.all([
+    readFile(new URL("app/globals.css", root), "utf8"),
     readFile(new URL("package.json", root), "utf8"),
     readFile(new URL("scripts/prepare-pages.mjs", root), "utf8"),
     readFile(new URL(".github/workflows/deploy-pages.yml", root), "utf8"),
+    readFile(new URL("vite.config.ts", root), "utf8"),
+    readFile(new URL("index.html", root), "utf8"),
   ]);
 
+  assert.match(css, /env\(safe-area-inset-top\)/);
+  assert.match(css, /:focus-visible/);
+  assert.match(css, /prefers-reduced-motion/);
+  assert.match(html, /viewport-fit=cover/);
   assert.match(packageJson, /node scripts\/prepare-pages\.mjs/);
   assert.match(prepareScript, /DynoCam-Site/);
   assert.match(prepareScript, /\.nojekyll/);
   assert.match(workflow, /path:\s*dist\/client/);
+  assert.match(config, /base:\s*"\/DynoCam-Site\/"/);
 });
