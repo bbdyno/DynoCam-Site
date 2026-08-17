@@ -69,6 +69,7 @@ test("includes release media and the GitHub Pages workflow", async () => {
   const required = [
     "public/images/climbing-motion-hero.png",
     "public/images/dynocam-icon.png",
+    "public/images/download-on-the-app-store.svg",
     "public/images/release/01-choose-subject.png",
     "public/images/release/02-motion-analysis.png",
     "public/images/release/03-follow-style.png",
@@ -80,6 +81,26 @@ test("includes release media and the GitHub Pages workflow", async () => {
     ".github/workflows/deploy-pages.yml",
   ];
   await Promise.all(required.map((path) => access(new URL(path, root))));
+});
+
+test("uses Apple's official App Store badge and product link", async () => {
+  const [client, css, translations, badge, readme] = await Promise.all([
+    readFile(new URL("app/HomeClient.tsx", root), "utf8"),
+    readFile(new URL("app/globals.css", root), "utf8"),
+    readFile(new URL("app/i18n.ts", root), "utf8"),
+    readFile(new URL("public/images/download-on-the-app-store.svg", root), "utf8"),
+    readFile(new URL("README.md", root), "utf8"),
+  ]);
+
+  assert.match(client, /https:\/\/apps\.apple\.com\/app\/id6800616313/);
+  assert.match(client, /className="app-store-badge"/);
+  assert.match(client, /aria-label=\{t\.hero\.secondary\}/);
+  assert.match(css, /\.app-store-badge img \{[^}]*height: 40px/);
+  assert.match(css, /\.app-store-badge \{[^}]*padding: 10px/);
+  assert.match(translations, /Apple and the Apple logo are trademarks of Apple Inc\./);
+  assert.match(badge, /Download_on_the_App_Store_Badge_US-UK_RGB_blk/);
+  assert.match(readme, /public\/images\/download-on-the-app-store\.svg/);
+  assert.doesNotMatch(readme, /img\.shields\.io\/badge\/App_Store/);
 });
 
 test("keeps responsive, accessible, project-path-safe output", async () => {

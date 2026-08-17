@@ -89,7 +89,7 @@ export type HomeCopy = {
   };
   privacy: { index: string; title: string; accent: string; body: string; link: string };
   closing: { status: string; title: string; accent: string; body: string; action: string };
-  footer: { tagline: string; support: string; privacy: string; review: string };
+  footer: { tagline: string; support: string; privacy: string; review: string; credit: string };
 };
 
 export const copy: Record<Locale, HomeCopy> = {
@@ -214,6 +214,7 @@ export const copy: Record<Locale, HomeCopy> = {
       support: "Support",
       privacy: "Privacy",
       review: "Version 1.0 is in App Review",
+      credit: "Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other countries and regions. App Store is a service mark of Apple Inc.",
     },
   },
   ko: {
@@ -337,6 +338,7 @@ export const copy: Record<Locale, HomeCopy> = {
       support: "지원",
       privacy: "개인정보",
       review: "버전 1.0 App Store 심사 중",
+      credit: "Apple 및 Apple 로고는 미국 및 기타 국가와 지역에 등록된 Apple Inc.의 상표입니다. App Store는 Apple Inc.의 서비스표입니다.",
     },
   },
   ja: {
@@ -392,7 +394,7 @@ export const copy: Record<Locale, HomeCopy> = {
     ], note: "Proは月間・年間プランで提供されます。現在の地域別価格はApp Storeがアプリ内に表示します。" },
     privacy: { index: "08 / PRIVATE BY DESIGN", title: "動画をiPhoneやiPadの外へ", accent: "出す必要はありません。", body: "検出、動作解析、カメラ演出、画質向上、書き出しは端末上で実行。DynoCamは元動画や書き出した動画を独自サーバーへアップロードしません。", link: "プライバシーポリシーを見る" },
     closing: { status: "バージョン1.0 · APP REVIEW待機中", title: "あなたの登り。", accent: "動きが演出するカメラ。", body: "DynoCam 1.0をiPhone・iPad向けにApp Reviewへ提出しました。", action: "App Storeページを見る" },
-    footer: { tagline: "クライミング動画のためのAIカメラ演出。", support: "サポート", privacy: "プライバシー", review: "バージョン1.0はApp Review中" },
+    footer: { tagline: "クライミング動画のためのAIカメラ演出。", support: "サポート", privacy: "プライバシー", review: "バージョン1.0はApp Review中", credit: "AppleおよびAppleロゴは、米国およびその他の国や地域で登録されたApple Inc.の商標です。App StoreはApple Inc.のサービスマークです。" },
   },
   "zh-Hans": {
     meta: { title: "DynoCam — 攀岩视频AI摄影师", description: "使用Follow Engine V2和设备端Action Intelligence，把固定机位攀岩视频变成自然的Follow Cam。" },
@@ -432,7 +434,7 @@ export const copy: Record<Locale, HomeCopy> = {
     ], note: "Pro提供月度和年度方案。App Store会在应用内显示您所在地区的当前价格。" },
     privacy: { index: "08 / PRIVATE BY DESIGN", title: "视频无需离开", accent: "你的iPhone或iPad。", body: "检测、动作分析、镜头设计、画质增强和导出均在设备端完成。DynoCam不会把原视频或导出视频上传到自己的服务器。", link: "阅读隐私政策" },
     closing: { status: "版本1.0 · 等待APP REVIEW", title: "你的攀爬。", accent: "由动作设计镜头。", body: "DynoCam 1.0已提交iPhone和iPad版App Review。", action: "查看App Store页面" },
-    footer: { tagline: "为攀岩视频设计的AI镜头。", support: "支持", privacy: "隐私", review: "版本1.0正在App Review中" },
+    footer: { tagline: "为攀岩视频设计的AI镜头。", support: "支持", privacy: "隐私", review: "版本1.0正在App Review中", credit: "Apple和Apple标志是Apple Inc.在美国及其他国家和地区注册的商标。App Store是Apple Inc.的服务标志。" },
   },
   "zh-Hant": {
     meta: { title: "DynoCam — 攀岩影片AI攝影師", description: "使用Follow Engine V2與裝置端Action Intelligence，把固定機位攀岩影片變成自然的Follow Cam。" },
@@ -472,7 +474,7 @@ export const copy: Record<Locale, HomeCopy> = {
     ], note: "Pro提供月度和年度方案。App Store會在App內顯示您所在地區的目前價格。" },
     privacy: { index: "08 / PRIVATE BY DESIGN", title: "影片無須離開", accent: "你的iPhone或iPad。", body: "偵測、動作分析、鏡頭設計、畫質增強和輸出均在裝置端完成。DynoCam不會把原始影片或輸出影片上傳到自己的伺服器。", link: "閱讀隱私權政策" },
     closing: { status: "版本1.0 · 等待APP REVIEW", title: "你的攀爬。", accent: "由動作設計鏡頭。", body: "DynoCam 1.0已提交iPhone與iPad版App Review。", action: "查看App Store頁面" },
-    footer: { tagline: "為攀岩影片設計的AI鏡頭。", support: "支援", privacy: "隱私權", review: "版本1.0正在App Review中" },
+    footer: { tagline: "為攀岩影片設計的AI鏡頭。", support: "支援", privacy: "隱私權", review: "版本1.0正在App Review中", credit: "Apple和Apple標誌是Apple Inc.在美國及其他國家和地區註冊的商標。App Store是Apple Inc.的服務標誌。" },
   },
 };
 

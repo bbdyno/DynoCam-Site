@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://bbdyno.github.io/DynoCam-Site/"><img alt="Website" src="https://img.shields.io/badge/Website-DynoCam-111111?style=for-the-badge"></a>
-  <a href="https://apps.apple.com/app/id6800616313"><img alt="App Store" src="https://img.shields.io/badge/App_Store-In_Review-0D96F6?style=for-the-badge&logo=apple"></a>
+  <a href="https://apps.apple.com/app/id6800616313"><img alt="Download on the App Store" src="./public/images/download-on-the-app-store.svg" height="40"></a>
   <img alt="Version" src="https://img.shields.io/badge/Version-1.0-8C6BC2?style=for-the-badge">
   <img alt="Platforms" src="https://img.shields.io/badge/Platforms-iPhone_%C2%B7_iPad-555555?style=for-the-badge&logo=apple">
 </p>

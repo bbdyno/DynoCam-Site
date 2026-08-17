@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { copy, localeLabels, locales, resolveLocale, type Locale } from "./i18n";
 
 const appStoreUrl = "https://apps.apple.com/app/id6800616313";
+const appStoreBadge = "./images/download-on-the-app-store.svg";
 const screenshotSources = [
   "./images/release/01-choose-subject.png",
   "./images/release/02-motion-analysis.png",
@@ -102,7 +103,7 @@ export default function Home() {
                 {locales.map((value) => <option key={value} value={value}>{localeLabels[value]}</option>)}
               </select>
             </label>
-            <a className="nav-cta" href={appStoreUrl}>{t.nav.appStore}<span aria-hidden="true">↗</span></a>
+            <a className="nav-cta" href={appStoreUrl} target="_blank" rel="noreferrer">{t.nav.appStore}<span aria-hidden="true">↗</span></a>
           </div>
         </nav>
       </header>
@@ -116,7 +117,9 @@ export default function Home() {
           <p className="hero-description">{t.hero.body}</p>
           <div className="hero-actions">
             <a className="primary-action" href="#workflow">{t.hero.primary}<span aria-hidden="true">↓</span></a>
-            <a className="secondary-action" href={appStoreUrl}>{t.hero.secondary}<span aria-hidden="true">↗</span></a>
+            <a className="app-store-badge" href={appStoreUrl} target="_blank" rel="noreferrer" aria-label={t.hero.secondary}>
+              <img src={appStoreBadge} alt="" />
+            </a>
           </div>
           <p className="review-status"><span aria-hidden="true" />{t.hero.status}</p>
         </div>
@@ -279,7 +282,7 @@ export default function Home() {
         <p>{t.closing.status}</p>
         <h2 id="closing-title"><span>{t.closing.title}</span><strong>{t.closing.accent}</strong></h2>
         <span className="closing-body">{t.closing.body}</span>
-        <a href={appStoreUrl}>{t.closing.action}<span aria-hidden="true">↗</span></a>
+        <a href={appStoreUrl} target="_blank" rel="noreferrer">{t.closing.action}<span aria-hidden="true">↗</span></a>
       </section>
 
       <footer>
@@ -290,6 +293,7 @@ export default function Home() {
           <a href={`./privacy/${localizedPath}`}>{t.footer.privacy}</a>
           <span>© 2026 DynoCam</span>
         </div>
+        <p className="apple-credit">{t.footer.credit}</p>
       </footer>
     </main>
   );
